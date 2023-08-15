@@ -41,14 +41,9 @@ wss.on("connection", async (ws, req) => {
 
   await subscriber.connect();
   console.log("Subscriber connected");
-  await subscriber.subscribe("article", (message) => {
+   subscriber.subscribe("article", (message) => {
     let record = JSON.parse(message);
     
-
-    // send message to all connected clients
-    // [...clients.values()].forEach((client) => {
-    //   client.send(message);
-    // });
     let client = clients.get(record.uuid_remote);
     if(client){
       client.send(JSON.stringify({
@@ -56,6 +51,7 @@ wss.on("connection", async (ws, req) => {
       }));
     }
   });
+  console.log("now listening to article channel");
 })();
 
 function uuidv4() {

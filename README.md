@@ -1,38 +1,38 @@
 ![architecture](https://github.com/youssefshibl/websocket_microservices_with_redis_pubsub/assets/63800183/a5b7445f-e95e-467b-a8a4-44dc3d567c44)
 
-## 🤿 Websocket Microservices With Redis pubsub
+## 🤿 Websocket Microservices With Redis Pubsub
 #### what is websocket microservices?
-websocket microservices are microservices that use websockets to communicate with each other 
+websocket microservices are microservices that use websockets to communicate server with client or reverse
 #### 🚧 what is redis pubsub?
-redis pubsub is a pubsub (messaging bor) system that uses redis as a backend 
+redis pubsub is a pubsub (messaging bor) system that uses Redis as a backend 
 
-###	🚧 why Websocket Microservice not intergreted with webserver ? 
-when websocket microservices integrate with webserver, it will be overloaded  with webserver request and response because of websocket connection transport data between client and server and do this many times with many clients , so it will be better to separate websocket microservice from webserver
+###	🚧 why Websocket Microservice not integrated with webserver ? 
+when websocket microservices integrate with webserver, it will be overloaded  with webserver request and response because of websocket connection transport data between client and server and do this many times with many clients, so it will be better to separate websocket microservice from webserver
 
 ###	🚧 how this architecture works?
-assume that we have two clients client A and client B , A want send meesage to B , B want to send message to A , so how do this , first A send message to webserver with metadata like this 
+assume that we have two clients client A and client B , A want send message to B , B wants to send a message to A, so how do this, first A sends message to webserver with metadata like this 
 ```js
 let message = {
     uuid_remote: UUID,
     uuid_local: UUID,
     message: message,
 }
-// uuid_remote : the uuid of the remote client
+// uuid_remote: the uuid of the remote client
 // uuid_local : the uuid of me 
-// message : the message that client want to send to the remote client
+// message: the message that the client want to send to the remote client
 ```
-this message get from client to webserver , webserver will take this messge and make some checkes on it and if it valid send it to redis pub_sub then websocket microservice will take this message and send it to the remote client throw websocket connection 
+this message get from client to webserver , webserver will take this message and make some checks on it and if it is valid send it to redis pub_sub then websocket microservice will take this message and send it to the remote client throw websocket connection 
 ### 🚧 practical example
 
-- when you open webpage , page will send reqeust to get token from server by any authentication method 
-- server will send token client then client try to open connection with websocket microservice
-- websocket microservice will send token to server to authenticate this connection
+- when you open webpage, page will send request to get a token from the server by any authentication method 
+- server will send a token client then the client try to open a connection with websocket microservice
+- websocket microservice will send the token to server to authenticate this connection
 - server will send authentication valid of token 
 - websocket microservice will accept this connection
-- client will send message to server with uuid of remote client 
-- server will send this message after make validation to this message 
-- send this meesage to redis pubsub
-- websocket microservice will take this message and send it to remote client
+- the client will send a message to the server with uuid of the remote client 
+- server will send this message after making validation to this message 
+- send this meesage to redis pub sub
+- websocket microservice will take this message and send it to the remote client
 
 ## 🚀 How run this architecture
 
